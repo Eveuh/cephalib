@@ -50,7 +50,7 @@ export default function TabLayout() {
                     tabBarIcon: () => (
                         <View style={styles.brainIconContainer}>
                             <Image
-                                source={require('../../assets/images/logo.png')}
+                                source={require('../../assets/images/logo_rouge.png')}
                                 style={styles.brainIcon}
                                 resizeMode="contain"
                             />
