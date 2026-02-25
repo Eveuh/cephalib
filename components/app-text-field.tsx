@@ -9,6 +9,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+import { AppColors } from '../constants/theme';
 
 /**
  * Custom TextField Props (matching Flutter's AppTextField)
@@ -20,6 +21,7 @@ export interface AppTextFieldProps extends Omit<TextInputProps, 'style'> {
   obscureText?: boolean;
   keyboardType?: KeyboardTypeOptions;
   textInputAction?: 'done' | 'next' | 'go';
+  prefixIcon?: ReactNode;
   suffixIcon?: ReactNode;
   onSubmitEditing?: () => void;
   containerStyle?: ViewStyle;
@@ -37,6 +39,7 @@ export function AppTextField({
   obscureText = false,
   keyboardType = 'default',
   textInputAction = 'done',
+  prefixIcon,
   suffixIcon,
   onSubmitEditing,
   containerStyle,
@@ -48,10 +51,16 @@ export function AppTextField({
       {label && <Text style={styles.label}>{label}</Text>}
 
       <View style={styles.inputContainer}>
+        {prefixIcon && <View style={styles.prefixIcon}>{prefixIcon}</View>}
         <TextInput
-          style={[styles.input, style, errorText && styles.inputError]}
+          style={[
+            styles.input,
+            prefixIcon ? styles.inputWithPrefix : undefined,
+            errorText ? styles.inputError : undefined,
+            style,
+          ]}
           placeholder={hintText}
-          placeholderTextColor="rgba(67, 102, 94, 0.4)"
+          placeholderTextColor={AppColors.primary.green40}
           secureTextEntry={obscureText}
           keyboardType={keyboardType}
           returnKeyType={textInputAction}
@@ -76,7 +85,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#43665E',
+    color: AppColors.primary.green,
     marginBottom: 6,
   },
   inputContainer: {
@@ -86,18 +95,26 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    backgroundColor: '#FFFCF0',
+    backgroundColor: AppColors.background,
     borderRadius: 14,
     paddingHorizontal: 16,
     paddingVertical: 14,
     fontSize: 15,
-    color: '#43665E',
+    color: AppColors.primary.green,
     borderWidth: 1,
-    borderColor: 'rgba(67, 102, 94, 0.2)',
+    borderColor: AppColors.background,
   },
   inputError: {
-    borderColor: '#B20300',
-    borderWidth: 1.5,
+    borderColor: AppColors.accent.red,
+    borderWidth: 1.2,
+  },
+  prefixIcon: {
+    position: 'absolute',
+    left: 22,
+    zIndex: 1,
+  },
+  inputWithPrefix: {
+    paddingLeft: 48,
   },
   suffixIcon: {
     position: 'absolute',
@@ -106,7 +123,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 12,
-    color: '#B20300',
+    color: AppColors.accent.red,
     marginTop: 4,
     marginLeft: 4,
   },

@@ -10,6 +10,7 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
+import { AppColors } from '../constants/theme';
 
 /**
  * Splash Screen with animated logo
@@ -118,7 +119,7 @@ export default function SplashScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FCF5ED',
+    backgroundColor: AppColors.surface,
     alignItems: 'center',
     justifyContent: 'center',
   },

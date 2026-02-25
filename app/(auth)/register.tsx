@@ -15,6 +15,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppPrimaryButton } from '../../components/app-primary-button';
 import { AppTextField } from '../../components/app-text-field';
+import { AppColors } from '../../constants/theme';
 import { useAuth } from '../../context/auth-context';
 import {
   validateConfirmPassword,
@@ -120,7 +121,8 @@ export default function RegisterScreen() {
               }}
               hintText="Nom..."
               textInputAction="next"
-              errorText={nameTouched ? nameError : undefined}
+              prefixIcon={<Ionicons name="person-outline" size={18} color={AppColors.secondary.peach} />}
+              errorText={nameTouched ? nameError ?? undefined : undefined}
               onBlur={() => {
                 setNameTouched(true);
                 setNameError(validateName(name));
@@ -142,7 +144,8 @@ export default function RegisterScreen() {
               hintText="Email..."
               keyboardType="email-address"
               textInputAction="next"
-              errorText={emailTouched ? emailError : undefined}
+              prefixIcon={<Ionicons name="mail-outline" size={18} color={AppColors.secondary.peach} />}
+              errorText={emailTouched ? emailError ?? undefined : undefined}
               onBlur={() => {
                 setEmailTouched(true);
                 setEmailError(validateEmail(email));
@@ -169,7 +172,8 @@ export default function RegisterScreen() {
               hintText="Mot de passe..."
               obscureText={obscurePassword}
               textInputAction="next"
-              errorText={passwordTouched ? passwordError : undefined}
+              prefixIcon={<Ionicons name="lock-closed-outline" size={18} color={AppColors.secondary.peach} />}
+              errorText={passwordTouched ? passwordError ?? undefined : undefined}
               onBlur={() => {
                 setPasswordTouched(true);
                 setPasswordError(validatePassword(password));
@@ -182,7 +186,7 @@ export default function RegisterScreen() {
                   <Ionicons
                     name={obscurePassword ? 'eye-off' : 'eye'}
                     size={22}
-                    color="#43665E"
+                    color={AppColors.primary.green}
                   />
                 </TouchableOpacity>
               }
@@ -204,7 +208,8 @@ export default function RegisterScreen() {
               hintText="Confirmer le mot de passe..."
               obscureText={obscureConfirmPassword}
               textInputAction="done"
-              errorText={confirmPasswordTouched ? confirmPasswordError : undefined}
+              prefixIcon={<Ionicons name="lock-closed-outline" size={18} color={AppColors.secondary.peach} />}
+              errorText={confirmPasswordTouched ? confirmPasswordError ?? undefined : undefined}
               onBlur={() => {
                 setConfirmPasswordTouched(true);
                 setConfirmPasswordError(
@@ -222,7 +227,7 @@ export default function RegisterScreen() {
                   <Ionicons
                     name={obscureConfirmPassword ? 'eye-off' : 'eye'}
                     size={22}
-                    color="#43665E"
+                    color={AppColors.primary.green}
                   />
                 </TouchableOpacity>
               }
@@ -256,7 +261,7 @@ export default function RegisterScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FCF5ED',
+    backgroundColor: AppColors.surface,
   },
   keyboardView: {
     flex: 1,
@@ -286,11 +291,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loginText: {
-    color: 'rgba(67, 102, 94, 0.65)',
+    color: AppColors.primary.green65,
     fontSize: 14,
   },
   loginTextBold: {
-    color: '#43665E',
+    color: AppColors.primary.green,
     fontSize: 14,
     fontWeight: 'bold',
   },

@@ -5,6 +5,32 @@
 
 import { Platform } from 'react-native';
 
+/**
+ * App colors matching tailwind.config.js
+ * Single source of truth for StyleSheet-based usage.
+ */
+export const AppColors = {
+  primary: {
+    green: '#43665E',
+    green65: 'rgba(67, 102, 94, 0.65)',
+    green75: 'rgba(67, 102, 94, 0.75)',
+    green40: 'rgba(67, 102, 94, 0.4)',
+    green20: 'rgba(67, 102, 94, 0.2)',
+    DEFAULT: '#3E655E',
+  },
+  secondary: {
+    peach: '#C59574',
+    //peach: '#DA906B',
+    peach50: 'rgba(197, 149, 116, 0.5)',
+    mint: '#B5C8C2',
+  },
+  accent: {
+    red: '#982F18',
+  },
+  surface: '#FAF5EF',
+  background: '#ffffff',
+} as const;
+
 const tintColorLight = '#0a7ea4';
 const tintColorDark = '#fff';
 

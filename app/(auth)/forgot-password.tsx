@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
@@ -13,9 +14,9 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppPrimaryButton } from '../../components/app-primary-button';
 import { AppTextField } from '../../components/app-text-field';
+import { AppColors } from '../../constants/theme';
 import { useAuth } from '../../context/auth-context';
 import { validateEmail } from '../../lib/validators';
-
 /**
  * Forgot Password Screen
  * Matches Flutter's ForgotPasswordPage design exactly
@@ -117,6 +118,7 @@ export default function ForgotPasswordScreen() {
               hintText="Email..."
               keyboardType="email-address"
               textInputAction="done"
+              prefixIcon={<Ionicons name="mail-outline" size={18} color={AppColors.secondary.peach} />}
               errorText={emailTouched ? emailError || undefined : undefined}
               onBlur={handleEmailBlur}
               onSubmitEditing={handleSend}
@@ -150,7 +152,7 @@ export default function ForgotPasswordScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FCF5ED',
+    backgroundColor: AppColors.surface,
   },
   keyboardView: {
     flex: 1,
@@ -174,12 +176,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#43665E',
+    color: AppColors.primary.green,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: 14,
-    color: 'rgba(67, 102, 94, 0.75)',
+    color: AppColors.primary.green75,
     textAlign: 'center',
     lineHeight: 20,
   },
@@ -187,7 +189,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   backLink: {
-    color: '#43665E',
+    color: AppColors.primary.green,
     fontSize: 14,
     fontWeight: 'bold',
   },

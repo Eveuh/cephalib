@@ -2,7 +2,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
-  Alert,
   Image,
   KeyboardAvoidingView,
   Platform,
@@ -10,11 +9,12 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppPrimaryButton } from '../../components/app-primary-button';
 import { AppTextField } from '../../components/app-text-field';
+import { AppColors } from '../../constants/theme';
 import { useAuth } from '../../context/auth-context';
 import { validateEmail, validatePassword } from '../../lib/validators';
 
@@ -75,9 +75,8 @@ export default function LoginScreen() {
 
     try {
       await login(email.trim(), password);
-      // Navigation will be handled by context/auth state
-      // For now, show success message (matching Flutter behavior)
-      Alert.alert('Connexion réussie', 'Connected (simulation) ✅');
+      // Navigate to home tabs after successful login
+      router.replace('/(tabs)/home');
     } catch (error) {
       // Error already handled by context
     }
@@ -119,6 +118,7 @@ export default function LoginScreen() {
               hintText="Email..."
               keyboardType="email-address"
               textInputAction="next"
+              prefixIcon={<Ionicons name="mail-outline" size={18} color={AppColors.secondary.peach} />}
               errorText={emailTouched ? emailError || undefined : undefined}
               onBlur={handleEmailBlur}
               autoCapitalize="none"
@@ -138,6 +138,7 @@ export default function LoginScreen() {
               hintText="Mot de passe..."
               obscureText={obscurePassword}
               textInputAction="done"
+              prefixIcon={<Ionicons name="lock-closed-outline" size={18} color={AppColors.secondary.peach} />}
               errorText={passwordTouched ? passwordError || undefined : undefined}
               onBlur={handlePasswordBlur}
               onSubmitEditing={handleLogin}
@@ -149,7 +150,7 @@ export default function LoginScreen() {
                   <Ionicons
                     name={obscurePassword ? 'eye-off' : 'eye'}
                     size={22}
-                    color="#43665E"
+                    color={AppColors.primary.green}
                   />
                 </TouchableOpacity>
               }
@@ -202,7 +203,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FCF5ED',
+    backgroundColor: AppColors.surface,
   },
   keyboardView: {
     flex: 1,
@@ -230,11 +231,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   forgotPasswordText: {
-    color: '#43665E',
+    color: AppColors.primary.green,
     fontSize: 14,
   },
   forgotPasswordTextBold: {
-    color: '#43665E',
+    color: AppColors.primary.green,
     fontSize: 14,
     fontWeight: 'bold',
   },
@@ -247,11 +248,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   registerText: {
-    color: 'rgba(67, 102, 94, 0.65)',
+    color: AppColors.primary.green65,
     fontSize: 14,
   },
   registerTextBold: {
-    color: '#43665E',
+    color: AppColors.primary.green,
     fontSize: 14,
     fontWeight: 'bold',
   },

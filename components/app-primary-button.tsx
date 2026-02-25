@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ViewStyle,
 } from 'react-native';
+import { AppColors } from '../constants/theme';
 
 /**
  * Custom Button Props (matching Flutter's AppPrimaryButton)
@@ -41,7 +42,7 @@ export function AppPrimaryButton({
       activeOpacity={0.7}
     >
       {isLoading ? (
-        <ActivityIndicator color="#FCF5ED" size="small" />
+        <ActivityIndicator color={AppColors.surface} size="small" />
       ) : (
         <Text style={styles.text}>{label}</Text>
       )}
@@ -51,7 +52,7 @@ export function AppPrimaryButton({
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#DA906B',
+    backgroundColor: AppColors.primary.green,
     borderRadius: 14,
     paddingHorizontal: 24,
     paddingVertical: 16,
@@ -60,10 +61,10 @@ const styles = StyleSheet.create({
     minHeight: 52,
   },
   buttonDisabled: {
-    backgroundColor: 'rgba(218, 144, 107, 0.5)',
+    backgroundColor: AppColors.secondary.peach50,
   },
   text: {
-    color: '#FCF5ED',
+    color: AppColors.surface,
     fontSize: 15,
     fontWeight: 'bold',
     letterSpacing: 0.5,
