@@ -2,6 +2,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { Image, Platform, StyleSheet, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import TabBarBackground from '../../components/TabBarBackground';
 import { AppColors } from '../../constants/theme';
 
 /**
@@ -10,14 +12,31 @@ import { AppColors } from '../../constants/theme';
  * Home, Chat, Brain (center logo), Stats, Settings
  */
 export default function TabLayout() {
+    const insets = useSafeAreaInsets();
+    const BASE_HEIGHT = Platform.OS === 'ios' ? 70 : 64;
+    const TAB_BAR_HEIGHT = BASE_HEIGHT + insets.bottom;
+
     return (
         <Tabs
             screenOptions={{
                 headerShown: false,
                 tabBarActiveTintColor: AppColors.primary.green,
-                tabBarInactiveTintColor: AppColors.primary.green40,
-                tabBarStyle: styles.tabBar,
+                tabBarInactiveTintColor: AppColors.secondary.mint,
+                tabBarStyle: [
+                    styles.tabBar,
+                    {
+                        position: 'absolute',
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        height: TAB_BAR_HEIGHT,
+                        paddingBottom: insets.bottom,
+                        backgroundColor: 'transparent',
+                    },
+                ],
                 tabBarShowLabel: false,
+                tabBarBackground: () => <TabBarBackground />,
+                tabBarItemStyle: { paddingTop: 30, },
             }}
         >
             <Tabs.Screen
@@ -88,23 +107,25 @@ export default function TabLayout() {
 
 const styles = StyleSheet.create({
     tabBar: {
-        backgroundColor: AppColors.background,
+        backgroundColor: 'transparent',
         borderTopWidth: 0,
         elevation: 0,
         shadowOpacity: 0,
-        height: Platform.OS === 'ios' ? 88 : 64,
         paddingTop: 8,
+
     },
     brainIconContainer: {
+        position: 'absolute',
+        backgroundColor: 'transparent',
         width: 56,
         height: 56,
         borderRadius: 28,
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: Platform.OS === 'ios' ? 20 : 8,
+        marginBottom: Platform.OS === 'ios' ? 60 : 16,
     },
     brainIcon: {
-        width: 52,
-        height: 52,
+        width: 60,
+        height: 60,
     },
 });
