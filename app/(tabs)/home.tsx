@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import React from 'react';
 import {
     ScrollView,
@@ -18,6 +19,7 @@ import { useAuth } from '../../context/auth-context';
  */
 export default function HomeScreen() {
     const { user } = useAuth();
+    const router = useRouter();
     const firstName = user?.name ?? 'Eve';
 
     return (
@@ -36,6 +38,7 @@ export default function HomeScreen() {
                 <View style={styles.cardsRow}>
                     <SelfCareCard
                         title="Exercices audio"
+                        onPress={() => router.push('/audio-exercises')}
                         icon={
                             <Ionicons
                                 name="headset-outline"
@@ -46,6 +49,7 @@ export default function HomeScreen() {
                     />
                     <SelfCareCard
                         title="Auto-massage"
+                        onPress={() => router.push('/auto-massage')}
                         icon={
                             <Ionicons
                                 name="hand-left-outline"
@@ -89,12 +93,14 @@ export default function HomeScreen() {
 function SelfCareCard({
     title,
     icon,
+    onPress,
 }: {
     title: string;
     icon: React.ReactNode;
+    onPress?: () => void;
 }) {
     return (
-        <TouchableOpacity style={styles.selfCareCard} activeOpacity={0.7}>
+        <TouchableOpacity style={styles.selfCareCard} activeOpacity={0.7} onPress={onPress}>
             <View style={styles.selfCareCardInner}>
                 <View style={styles.cardIconWrap}>{icon}</View>
                 <TouchableOpacity style={styles.arrowButton}>
@@ -164,7 +170,6 @@ function ProgressRing({
 }
 
 /* ───── Styles ───── */
-
 const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
